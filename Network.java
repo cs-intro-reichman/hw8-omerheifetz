@@ -68,18 +68,12 @@ public class Network {
     public boolean addFollowee(String name1, String name2) {
         boolean checkName1 = false;
         boolean checkName2 = false;
-        for (int i=0; i<this.userCount; i++) {
-            if (this.users[i].getName().equals(name1)) {
-                checkName1 = true;
-            }
-            if (this.users[i].getName().equals(name2)) {
-                checkName2 = true;
-            }
-        }
-        if (!checkName1 && !checkName2) {
+        User u1 = getUser(name1);
+        User u2 = getUser(name2);
+        if (u1 == null || u2 == null || name1.equals(name2)) {
             return false;
         }
-        return false;
+        return u1.addFollowee(name2);
     }
     
     /** For the user with the given name, recommends another user to follow. The recommended user is
